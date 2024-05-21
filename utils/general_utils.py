@@ -113,3 +113,45 @@ class process_circles:
 
     def save_image(self,out_path,image):
         cv2.imwrite(out_path, image)
+
+    def tune_circle_search(
+            self,
+            opts,
+            minRadius, 
+            maxRadius, 
+            minDist
+    ):
+        dp, param1, param2, blur = opts
+        param1 = int(param1)
+        param2 = int(param2)
+        blur = int(blur)
+        blur = (blur,blur)
+
+        minRadius = int(minRadius)
+        maxRadius = int(maxRadius)
+        minDist = int(minDist)
+        try:
+            self.find_circles(
+                method=cv2.HOUGH_GRADIENT, 
+                dp=dp, 
+                minDist=minDist,
+                param1=param1, 
+                param2=param2, 
+                minRadius=minRadius, 
+                maxRadius=maxRadius,
+                blur=blur
+            )
+        except:
+            return 1000
+        identifications_filled = self.plot_circles(
+            plot=False,
+            fill=True,
+            radius_overlay=False,
+            save=False
+        )
+        dark_pixels_coloured = self.colour_dark_by_threshhold()
+        identified_pixel_count = np.count_nonzero(np.all(identifications_filled == (255, 0, 0), axis=2))
+        intersection = np.bitwise_and(dark_pixels_coloured, identifications_filled)
+        print(intersection)
+        dark_pixel_count = np.count_nonzero(np.all(dark_pixels_coloured == (255, 0, 0), axis=2))
+        return abs((identified_pixel_count/dark_pixel_count)-1)
