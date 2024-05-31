@@ -166,5 +166,5 @@ cython_debug/
 ./gray_coloured
 ./test.csv
 ./run.py
-./centriole_test_data
-./out_images
+centriole_test_data
+out_images
