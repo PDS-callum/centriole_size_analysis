@@ -1,4 +1,4 @@
-from utils.general_utils import process_circles
+from utils.class_util import process_circles
 import glob
 import pandas as pd
 

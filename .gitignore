@@ -164,3 +164,7 @@ cython_debug/
 ./testing.ipynb
 ./out_images
 ./gray_coloured
+./test.csv
+./run.py
+./centriole_test_data
+./out_images

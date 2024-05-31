@@ -1,157 +1,111 @@
 import cv2
 import numpy as np
 import pandas as pd
+from matplotlib import pyplot as plt
+import os
+import plotly.express as px
 
-class process_circles:
-    def __init__(self,image_path:str):
-        '''
-        PARAMETERS
-        path (str): The string path to the image file.
-        '''
-        self.image_path = image_path
-        self.image = cv2.imread(self.image_path)
-        self.image_gray = cv2.cvtColor(self.image, cv2.COLOR_BGR2GRAY)
+def read_image(path):
+    return cv2.imread(path)
 
-    def find_circles(
-            self,
+def gray(
+        image
+):
+    return cv2.cvtColor(image, cv2.COLOR_BGR2GRAY)
+
+def blur(
+        image,
+        intensity,
+        type="median"
+):
+    if type == "median":
+        return cv2.medianBlur(image, intensity)
+    
+def find_circles(
+        image,
+        method,
+        dp,
+        minDist,
+        param1,
+        param2,
+        minRadius,
+        maxRadius
+):
+    circles = cv2.HoughCircles(
+        image=image, 
+        method=method, 
+        dp=dp, 
+        minDist=minDist,
+        param1=param1, 
+        param2=param2, 
+        minRadius=minRadius, 
+        maxRadius=maxRadius
+    )
+    coordinates = [(x[0],x[1]) for x in np.uint16(np.around(circles))[0, :]]
+    radii = [x[2] for x in np.uint16(np.around(circles))[0, :]]
+    return pd.DataFrame({
+        "coordinate":coordinates,
+        "radius":radii
+    })
+
+def plot_circles(
+        image,
+        df
+):
+    for i, row in df.iterrows():
+        cv2.circle(image, row.coordinate, row.radius, (255, 0, 0), 2)
+        font = cv2.FONT_HERSHEY_SIMPLEX
+        label = f"{int(row.radius)}"
+        cv2.putText(image, label, (row.coordinate[0] - int(row.radius/2), row.coordinate[1] + int(row.radius/2)), font, 1, (0,0,255), 2)
+    return image
+
+def plot(
+        image,
+        size=(50,7),
+        gray=False
+):
+    plt.figure(figsize = size)
+    if gray:
+        plt.imshow(image, interpolation='nearest', cmap="gray")
+    else:
+        plt.imshow(image, interpolation='nearest')
+    plt.show()
+
+def annotate_images(
+        image_paths,
+        save_dir,
+        blur_intensity=15,
+        blur_type="median"
+):
+    if type(image_paths) == str:
+        image_paths = [image_paths]
+    circles_data_df = pd.DataFrame()
+    for path in image_paths:
+        file_name = os.path.basename(path)
+        image = read_image(path)
+        grayed = gray(image)
+        blurred = blur(grayed,blur_intensity,type=blur_type)
+        circles_df = find_circles(
+            image=blurred,
             method=cv2.HOUGH_GRADIENT, 
-            dp=1.3, 
-            minDist=50,
-            param1=70, 
-            param2=40, 
-            minRadius=10, 
-            maxRadius=100,
-            blur_type:str="standard",
-            blur=(9,9),
-    ):
-        '''
-        This function takes in an image by the file path, reads it into an object and then returns those circles.
-        PARAMETERS
-        path (str): The string path to the image file.
-        '''
-        if blur_type == "standard":
-            self.image_gray_blur = cv2.blur(self.image_gray,blur, 0)
-        elif blur_type == "gaussian":
-            self.image_gray_blur = cv2.GaussianBlur(self.image_gray,blur, 0)
-        circles = cv2.HoughCircles(
-            image=self.image_gray_blur, 
-            method=method, 
-            dp=dp, 
-            minDist=minDist,
-            param1=param1, 
-            param2=param2, 
-            minRadius=minRadius, 
-            maxRadius=maxRadius
+            dp=1, 
+            minDist=100,
+            param1=20, 
+            param2=30, 
+            minRadius=25, 
+            maxRadius=100
         )
-        coordinates = [(x[0],x[1]) for x in np.uint16(np.around(circles))[0, :]]
-        radii = [x[2] for x in np.uint16(np.around(circles))[0, :]]
-        self.circles_df = pd.DataFrame({"coordinate":coordinates,"radius":radii})
-        return self.circles_df
-    
-    def plot_circles(
-            self,
-            plot:bool=False,
-            fill:bool=False,
-            out_dir:str="out_images",
-            save:bool=True,
-            radius_overlay:bool=True,
-            thickness:int=2,
-            font_size=0.5
-    ):
-        annotated_image = self.image.copy()
-        if fill:
-            thickness = -1
-        for i, row in self.circles_df.iterrows():
-            cv2.circle(annotated_image, row.coordinate, row.radius, (255, 0, 0), thickness)
-            font = cv2.FONT_HERSHEY_SIMPLEX
-            if radius_overlay:
-                label = f"{int(row.radius)}"
-                cv2.putText(annotated_image, label, (row.coordinate[0] - int(row.radius/2), row.coordinate[1] + int(row.radius/2)), font, font_size, (0,0,255), 2)
-        if plot:
-            cv2.imshow("Circles with Labels", annotated_image)
-            cv2.waitKey(0)
-            cv2.destroyAllWindows()
-        if save:
-            path_parts = self.image_path.split("\\")
-            path_parts[0] = out_dir
-            out_path = "\\".join(path_parts)
-            cv2.imwrite(out_path, annotated_image)
-        return annotated_image
-    
-    def count_colour_pixels(
-            self,
-            annotated_image,
-            colour_lower_bound:np.array=np.array([255, 0, 0]),
-            colour_upper_bound:np.array=np.array([255, 0, 0])
-    ):
-        hsv_image = cv2.cvtColor(annotated_image, cv2.COLOR_BGR2HSV)
-        mask = cv2.inRange(hsv_image, colour_lower_bound, colour_upper_bound)
-        pixel_count = cv2.countNonZero(mask)
-        return pixel_count
-
-    def colour_dark_by_threshhold(self,threshold:int=120):
-        # Create mask for black and gray pixels
-        mask = cv2.threshold(self.image_gray, threshold, 255, cv2.THRESH_BINARY)[1]
-
-        # Invert the mask for easier manipulation (black becomes white, white becomes black)
-        mask = 255 - mask
-
-        # Convert image to BGR format for color manipulation (might be redundant if loaded as BGR already)
-        bgr_image = cv2.cvtColor(self.image_gray, cv2.COLOR_GRAY2BGR)
-
-        # Set blue color
-        color = (255, 0, 0)
-
-        # Apply color based on mask
-        bgr_image[mask == 255] = color  # Replace black/gray pixels with blue where mask is white (inverted)
-        return bgr_image
-    
-    def show_image(self,image,label:str="image label"):
-        cv2.imshow(label,image)
-        cv2.waitKey(0)
-        cv2.destroyAllWindows()
-
-    def save_image(self,out_path,image):
-        cv2.imwrite(out_path, image)
-
-    def tune_circle_search(
-            self,
-            opts,
-            minRadius, 
-            maxRadius, 
-            minDist
-    ):
-        dp, param1, param2, blur = opts
-        param1 = int(param1)
-        param2 = int(param2)
-        blur = int(blur)
-        blur = (blur,blur)
-
-        minRadius = int(minRadius)
-        maxRadius = int(maxRadius)
-        minDist = int(minDist)
-        try:
-            self.find_circles(
-                method=cv2.HOUGH_GRADIENT, 
-                dp=dp, 
-                minDist=minDist,
-                param1=param1, 
-                param2=param2, 
-                minRadius=minRadius, 
-                maxRadius=maxRadius,
-                blur=blur
-            )
-        except:
-            return 1000
-        identifications_filled = self.plot_circles(
-            plot=False,
-            fill=True,
-            radius_overlay=False,
-            save=False
+        annotated_image = plot_circles(
+            image,
+            circles_df
         )
-        dark_pixels_coloured = self.colour_dark_by_threshhold()
-        identified_pixel_count = np.count_nonzero(np.all(identifications_filled == (255, 0, 0), axis=2))
-        intersection = np.bitwise_and(dark_pixels_coloured, identifications_filled)
-        print(intersection)
-        dark_pixel_count = np.count_nonzero(np.all(dark_pixels_coloured == (255, 0, 0), axis=2))
-        return abs((identified_pixel_count/dark_pixel_count)-1)
+        cv2.imwrite(save_dir+"/"+file_name, annotated_image)
+        circles_df["filename"] = file_name
+        circles_data_df = pd.concat([circles_data_df,circles_df])
+    return circles_data_df
+
+def get_radii_hist(df,file_name):
+    query_df = df.query("file_name == @file_name").copy()
+    radii_list = query_df.radii.values[0].split(",")
+    fig = px.histogram(radii_list)
+    fig.show()
