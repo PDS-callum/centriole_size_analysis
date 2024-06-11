@@ -99,9 +99,10 @@ def annotate_images(
             image,
             circles_df
         )
-        cv2.imwrite(save_dir+"/"+file_name, annotated_image)
+        cv2.imwrite(f"{save_dir}/{file_name}", annotated_image)
         circles_df["filename"] = file_name
         circles_data_df = pd.concat([circles_data_df,circles_df])
+    circles_data_df.to_csv(f"{save_dir}/1_size_analysis.csv",index=False)
     return circles_data_df
 
 def get_radii_hist(df,file_name):

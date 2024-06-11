@@ -1,7 +1,7 @@
 import cv2
 import numpy as np
 import pandas as pd
-from sklearn.metrics import jaccard_score
+# from sklearn.metrics import jaccard_score
 
 class process_circles:
     def __init__(self,image_path:str):

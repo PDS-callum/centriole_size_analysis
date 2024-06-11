@@ -18,37 +18,28 @@
 *** for contributors-url, forks-url, etc. This is an optional, concise syntax you may use.
 *** https://www.markdownguide.org/basic-syntax/#reference-style-links
 -->
-[![Contributors][contributors-shield]][contributors-url]
-[![Forks][forks-shield]][forks-url]
-[![Stargazers][stars-shield]][stars-url]
-[![Issues][issues-shield]][issues-url]
-[![MIT License][license-shield]][license-url]
 [![LinkedIn][linkedin-shield]][linkedin-url]
+[![Contributors][contributors-shield]][contributors-url]
+[![MIT License][license-shield]][license-url]
 
 
 
 <!-- PROJECT LOGO -->
-[![Company Logo][logo]][logo-url]
-<!-- <img src=".images/logo_placeholder.jpg.jpg" alt="drawing" width="200"/> -->
 <br />
 <div align="center">
-  <a href="https://github.com/othneildrew/Best-README-Template">
-    <img src="images/logo.png" alt="Logo" width="80" height="80">
-  </a>
+    <a href="https://github.com/Pluto-Data-Science">
+        <img src=".images/logo_placeholder.jpg" alt="drawing" width="200" style="display: block; margin: 0 auto;">
+    </a>
 
-  <h3 align="center">Best-README-Template</h3>
+  <h3 align="center">Centriole Morphology Analysis</h3>
 
   <p align="center">
-    An awesome README template to jumpstart your projects!
+    This repo contains python code for the automated analysis of the size and (in future) shape of centrioles using computer vision.
     <br />
-    <a href="https://github.com/othneildrew/Best-README-Template"><strong>Explore the docs »</strong></a>
+    <a href="https://github.com/PDS-callum/centriole_size_analysis"><strong>Explore the docs »</strong></a>
     <br />
     <br />
-    <a href="https://github.com/othneildrew/Best-README-Template">View Demo</a>
-    ·
-    <a href="https://github.com/othneildrew/Best-README-Template/issues/new?labels=bug&template=bug-report---.md">Report Bug</a>
-    ·
-    <a href="https://github.com/othneildrew/Best-README-Template/issues/new?labels=enhancement&template=feature-request---.md">Request Feature</a>
+    <a href="mailto: cpmwaller@gmail.com">Request Feature</a>
   </p>
 </div>
 
@@ -87,16 +78,7 @@
 
 [![Product Name Screen Shot][product-screenshot]](https://example.com)
 
-There are many great README templates available on GitHub; however, I didn't find one that really suited my needs so I created this enhanced one. I want to create a README template so amazing that it'll be the last one you ever need -- I think this is it.
-
-Here's why:
-* Your time should be focused on creating something amazing. A project that solves a problem and helps others
-* You shouldn't be doing the same tasks over and over like creating a README from scratch
-* You should implement DRY principles to the rest of your life :smile:
-
-Of course, no one template will serve all projects since your needs may be different. So I'll be adding more in the near future. You may also suggest changes by forking this repo and creating a pull request or opening an issue. Thanks to all the people have contributed to expanding this template!
-
-Use the `BLANK_README.md` to get started.
+The above image is a propotype of the analysis dashboard being developed. Currently this only shows the histogram analysis of centriole sizes in the input files, sorted by file name. In future this will also contain a drag and drop auto processing section so that files can be analysed on the fly.
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
@@ -104,16 +86,12 @@ Use the `BLANK_README.md` to get started.
 
 ### Built With
 
-This section should list any major frameworks/libraries used to bootstrap your project. Leave any add-ons/plugins for the acknowledgements section. Here are a few examples.
+This section should list any major frameworks/libraries used to bootstrap the project.
 
-* [![Next][Next.js]][Next-url]
-* [![React][React.js]][React-url]
-* [![Vue][Vue.js]][Vue-url]
-* [![Angular][Angular.io]][Angular-url]
-* [![Svelte][Svelte.dev]][Svelte-url]
-* [![Laravel][Laravel.com]][Laravel-url]
-* [![Bootstrap][Bootstrap.com]][Bootstrap-url]
-* [![JQuery][JQuery.com]][JQuery-url]
+* [![pandas][pandas]][pandas-url]
+* [![plotly][plotly]][plotly-url]
+* [![cv][cv]][cv-url]
+* [![numpy][numpy]][numpy-url]
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
@@ -122,45 +100,98 @@ This section should list any major frameworks/libraries used to bootstrap your p
 <!-- GETTING STARTED -->
 ## Getting Started
 
-This is an example of how you may give instructions on setting up your project locally.
-To get a local copy up and running follow these simple example steps.
+Here I leave general instructions on how to use the software.
+Currently I haven't packaged this properly so the best way to use it is to pull the repo.
 
-### Prerequisites
+### Install Python
 
-This is an example of how to list things you need to use the software and how to install them.
-* npm
-  ```sh
-  npm install npm@latest -g
-  ```
+To run this code you will need to have a publicly accessibly install of Python. This is done differently depending on your platform but is generally fairly straightforward.
+
+#### Windows
+
+I could write a tutorial here but instead I would recommend following "Digital Oceans" tutorial. They are very good and I tend to follow their tutorials when I do new things...
+
+https://www.digitalocean.com/community/tutorials/install-python-windows-10
+
+#### Mac
+
+https://www.digitalocean.com/community/tutorials/how-to-install-python-3-and-set-up-a-local-programming-environment-on-macos
+
+#### Linux (Ubuntu)
+
+https://www.digitalocean.com/community/tutorials/how-to-install-python-3-and-set-up-a-programming-environment-on-ubuntu-20-04-quickstart
+
+### Install Git
+
+To run this code you will need to have a publicly accessibly install of Git. This is done differently depending on your platform but is generally fairly straightforward.
+
+https://git-scm.com/book/en/v2/Getting-Started-Installing-Git
+
+### Visual Studio Code
+
+Incase the user is not overly familiar with using command line software, I recommend running this from Visual Studio Code (VScode), definitely for Windows users but likely this is a good option for Linux or Mac users also.
+Download Visual Studio Code with the default options here...
+
+https://code.visualstudio.com/download
+
+### Setup
+
+1. Create a directory somewhere on your PC that you will use to store GitHub repositories. 
+    - This is where you will pull projects to and each project you pull will create it's own directory when you pull it. 
+    - I store mine in a directory called "GitHub" which is inside my "Documents" directory on windows.
+2. Open VScode and navigate to the directory you created.
+    - In VScode, press ctrl+shift+p and navigate to "create terminal" in the pop up.
+    - Then use the below command to navigate to the directory you created...
+    ```sh
+    cd path/to/your/directory
+    ```
+    - Keep in mind that this will be from the home directroy so if you are unsure what directory you are in when the terminal opens, use the below cose...
+        - Windows
+        ```sh
+        dir
+        ```
+        - Mac or Linux
+        ```sh
+        pwd
+        ```
 
 ### Installation
 
-_Below is an example of how you can instruct your audience on installing and setting up your app. This template doesn't rely on any external dependencies or services._
+1. When you have navigated to the correct directory, use the below code to pull the repo...
+    ```sh
+    git clone https://github.com/PDS-callum/centriole_size_analysis.git
+    ```
+2. Navigate to the directory...
+    ```sh
+    cd centriole_size_analysis
+    ```
+3.  Open the pop up (ctrl+shift+p) and navigate to "create environment". 
+    When prompted, create the environment from "requirements.txt".
+    - This will create a local environment of python modules for the software to use.
+    - Essentially this stops them from being install systemwide and potentially causing problems later on.
 
-1. Get a free API Key at [https://example.com](https://example.com)
-2. Clone the repo
-   ```sh
-   git clone https://github.com/your_username_/Project-Name.git
-   ```
-3. Install NPM packages
-   ```sh
-   npm install
-   ```
-4. Enter your API in `config.js`
-   ```js
-   const API_KEY = 'ENTER YOUR API';
-   ```
+### Running the analysis
 
-<p align="right">(<a href="#readme-top">back to top</a>)</p>
+The analysis can be run in two way, either by run.py or usage.ipynb.
 
+run.py - A file which runs directly from a config. This is for packaging the application later, but can generate the data.
 
+usage.ipynb - If you're new to python then this is easier. This will run the analysis step by step and makes it easier to follow. Currently there are not many steps but in future this may be helpful.
 
-<!-- USAGE EXAMPLES -->
-## Usage
+#### run.py
 
-Use this space to show useful examples of how a project can be used. Additional screenshots, code examples and demos work well in this space. You may also link to more resources.
+1. Open the config in "configs/config.yaml" in any text editor (or you can do this is VScode).
+2. Fill change the values after the ":" for "test_image_path" and "image_save_path".
+    - test_image_path - The directory where you are keeping the scan images. Images will also be found if they are in a directory in that directory but this will only search one directory down.
+    - image_save_path - Where you want to save the images to. You can leave this as default and it will save to the repo folder in "out_images".
+3. Open "run.py" in VScode and press the play button in the top right. 
+    - If prompted to select what python version to use, use the ".venv".
 
-_For more examples, please refer to the [Documentation](https://example.com)_
+#### usage.ipynb
+1. Open "usage.ipynb" in VScode.
+2. Press "run all" at the top, or run it cell by cell.
+    - When prompted to install additional resources, install them.
+    - If prompted to select what python version to use, use the ".venv".
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
@@ -169,33 +200,10 @@ _For more examples, please refer to the [Documentation](https://example.com)_
 <!-- ROADMAP -->
 ## Roadmap
 
-- [x] Add Changelog
-- [x] Add back to top links
-- [ ] Add Additional Templates w/ Examples
-- [ ] Add "components" document to easily copy & paste sections of the readme
-- [ ] Multi-language Support
-    - [ ] Chinese
-    - [ ] Spanish
-
-See the [open issues](https://github.com/othneildrew/Best-README-Template/issues) for a full list of proposed features (and known issues).
-
-<p align="right">(<a href="#readme-top">back to top</a>)</p>
-
-
-
-<!-- CONTRIBUTING -->
-## Contributing
-
-Contributions are what make the open source community such an amazing place to learn, inspire, and create. Any contributions you make are **greatly appreciated**.
-
-If you have a suggestion that would make this better, please fork the repo and create a pull request. You can also simply open an issue with the tag "enhancement".
-Don't forget to give the project a star! Thanks again!
-
-1. Fork the Project
-2. Create your Feature Branch (`git checkout -b feature/AmazingFeature`)
-3. Commit your Changes (`git commit -m 'Add some AmazingFeature'`)
-4. Push to the Branch (`git push origin feature/AmazingFeature`)
-5. Open a Pull Request
+- [x] Add initial analysis
+- [x] Add a Dash app which visualises the size analysis as histograms.
+- [ ] Add a dash app for drag and drop single slide analysis.
+- [ ] Tune analysis
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
@@ -213,27 +221,7 @@ Distributed under the MIT License. See `LICENSE.txt` for more information.
 <!-- CONTACT -->
 ## Contact
 
-Your Name - [@your_twitter](https://twitter.com/your_username) - email@example.com
-
-Project Link: [https://github.com/your_username/repo_name](https://github.com/your_username/repo_name)
-
-<p align="right">(<a href="#readme-top">back to top</a>)</p>
-
-
-
-<!-- ACKNOWLEDGMENTS -->
-## Acknowledgments
-
-Use this space to list resources you find helpful and would like to give credit to. I've included a few of my favorites to kick things off!
-
-* [Choose an Open Source License](https://choosealicense.com)
-* [GitHub Emoji Cheat Sheet](https://www.webpagefx.com/tools/emoji-cheat-sheet)
-* [Malven's Flexbox Cheatsheet](https://flexbox.malven.co/)
-* [Malven's Grid Cheatsheet](https://grid.malven.co/)
-* [Img Shields](https://shields.io)
-* [GitHub Pages](https://pages.github.com)
-* [Font Awesome](https://fontawesome.com)
-* [React Icons](https://react-icons.github.io/react-icons/search)
+Project Link: [https://github.com/PDS-callum/centriole_size_analysis](https://github.com/PDS-callum/centriole_size_analysis)
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
@@ -241,35 +229,22 @@ Use this space to list resources you find helpful and would like to give credit 
 
 <!-- MARKDOWN LINKS & IMAGES -->
 <!-- https://www.markdownguide.org/basic-syntax/#reference-style-links -->
-[contributors-shield]: https://img.shields.io/github/contributors/othneildrew/Best-README-Template.svg?style=for-the-badge
+[contributors-shield]: https://img.shields.io/badge/Contributors-1-blue
 [contributors-url]: https://github.com/PDS-callum
+[license-shield]: https://img.shields.io/badge/License-MIT-green
+[license-url]: https://github.com/PDS-callum/centriole_size_analysis/blob/main/LICENSE.txt
 [linkedin-shield]: https://img.shields.io/badge/-LinkedIn-black.svg?style=for-the-badge&logo=linkedin&colorB=555
 [linkedin-url]: https://www.linkedin.com/in/callum-waller-a68354a1/
+
+[pandas]: https://img.shields.io/badge/Pandas-2C2D72?style=for-the-badge&logo=pandas&logoColor=white
+[pandas-url]: https://pandas.pydata.org
+[plotly]: https://img.shields.io/badge/Plotly-239120?style=for-the-badge&logo=plotly&logoColor=white
+[plotly-url]: https://plotly.com
+[numpy]: https://img.shields.io/badge/Numpy-777BB4?style=for-the-badge&logo=numpy&logoColor=white
+[numpy-url]: https://numpy.org
+[cv]: https://img.shields.io/badge/OpenCV-27338e?style=for-the-badge&logo=OpenCV&logoColor=white
+[cv-url]: https://opencv.org
+
 [product-screenshot]: .images/screenshot.png
 [logo]: .images/logo_placeholder.jpg
 [logo-url]: https://github.com/Pluto-Data-Science
-
-[forks-shield]: https://img.shields.io/github/forks/othneildrew/Best-README-Template.svg?style=for-the-badge
-[forks-url]: https://github.com/othneildrew/Best-README-Template/network/members
-[stars-shield]: https://img.shields.io/github/stars/othneildrew/Best-README-Template.svg?style=for-the-badge
-[stars-url]: https://github.com/othneildrew/Best-README-Template/stargazers
-[issues-shield]: https://img.shields.io/github/issues/othneildrew/Best-README-Template.svg?style=for-the-badge
-[issues-url]: https://github.com/othneildrew/Best-README-Template/issues
-[license-shield]: https://img.shields.io/github/license/othneildrew/Best-README-Template.svg?style=for-the-badge
-[license-url]: https://github.com/othneildrew/Best-README-Template/blob/master/LICENSE.txt
-[Next.js]: https://img.shields.io/badge/next.js-000000?style=for-the-badge&logo=nextdotjs&logoColor=white
-[Next-url]: https://nextjs.org/
-[React.js]: https://img.shields.io/badge/React-20232A?style=for-the-badge&logo=react&logoColor=61DAFB
-[React-url]: https://reactjs.org/
-[Vue.js]: https://img.shields.io/badge/Vue.js-35495E?style=for-the-badge&logo=vuedotjs&logoColor=4FC08D
-[Vue-url]: https://vuejs.org/
-[Angular.io]: https://img.shields.io/badge/Angular-DD0031?style=for-the-badge&logo=angular&logoColor=white
-[Angular-url]: https://angular.io/
-[Svelte.dev]: https://img.shields.io/badge/Svelte-4A4A55?style=for-the-badge&logo=svelte&logoColor=FF3E00
-[Svelte-url]: https://svelte.dev/
-[Laravel.com]: https://img.shields.io/badge/Laravel-FF2D20?style=for-the-badge&logo=laravel&logoColor=white
-[Laravel-url]: https://laravel.com
-[Bootstrap.com]: https://img.shields.io/badge/Bootstrap-563D7C?style=for-the-badge&logo=bootstrap&logoColor=white
-[Bootstrap-url]: https://getbootstrap.com
-[JQuery.com]: https://img.shields.io/badge/jQuery-0769AD?style=for-the-badge&logo=jquery&logoColor=white
-[JQuery-url]: https://jquery.com 
