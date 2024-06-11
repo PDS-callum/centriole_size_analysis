@@ -221,9 +221,11 @@ Distributed under the MIT License. See `LICENSE.txt` for more information.
 <!-- CONTACT -->
 ## Contact
 
-<a href="mailto: cpmwaller@gmail.com">Email me</a>
+My GitHub: [https://github.com/PDS-callum](https://github.com/PDS-callum)
 
 Project Link: [https://github.com/PDS-callum/centriole_size_analysis](https://github.com/PDS-callum/centriole_size_analysis)
+
+<a href="mailto: cpmwaller@gmail.com">Email me</a>
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
