@@ -76,7 +76,7 @@
 <!-- ABOUT THE PROJECT -->
 ## About The Project
 
-<img src=".images\Screenshot.png" alt="drawing" width="200" style="display: block; margin: 0 auto;">
+<img src=".images\Screenshot.png" alt="drawing" style="display: block; margin: 0 auto;">
 
 The above image is a propotype of the analysis dashboard being developed. Currently this only shows the histogram analysis of centriole sizes in the input files, sorted by file name. In future this will also contain a drag and drop auto processing section so that files can be analysed on the fly.
 
