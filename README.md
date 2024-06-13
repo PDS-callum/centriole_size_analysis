@@ -115,7 +115,7 @@ https://www.digitalocean.com/community/tutorials/install-python-windows-10
 
 #### Mac
 
-https://www.digitalocean.com/community/tutorials/how-to-install-python-3-and-set-up-a-local-programming-environment-on-macos
+https://www.dataquest.io/blog/installing-python-on-mac/
 
 #### Linux (Ubuntu)
 
